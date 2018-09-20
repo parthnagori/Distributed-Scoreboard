@@ -50,6 +50,8 @@ def join(zk,name,count=None,delay=None,score=None):
       print("Please enter a score for {}".format(name))
       try:
         curr_score = int(input())
+        if curr_score < 0:
+          continue
         post_score(zk, name, curr_score)
       except ValueError:
         print("Score is not a valid integer.")
