@@ -1,0 +1,2 @@
+alias player="python3 player.py"
+alias watcher="python3 watcher.py"
