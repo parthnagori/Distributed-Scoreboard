@@ -5,11 +5,15 @@ import random
 import pickle
 import time
 
+#Establishing connection with the Zookeeper Server
 def establish_connection(ip_port):
   zk = KazooClient()
   zk.start()
   return zk
 
+#Creating Base Directories:
+#--->online_players for maintaining player online session
+#--->score_db to maintain recent and highest scores
 def establish_directories(zk):
   children = zk.get_children('/')
   if 'DIC' not in children:
@@ -17,9 +21,11 @@ def establish_directories(zk):
     zk.create('/DIC/online_players', ephemeral=False)
     zk.create('/DIC/score_db', ephemeral=False)
 
+#To get list of currently online players
 def get_online_players(zk):
   return zk.get_children('/DIC/online_players')
 
+#Post a score to the server for the current player
 def post_score(zk, name, curr_score):
   data, stat = zk.get('DIC/score_db')
   scores = [[],[]]
@@ -32,9 +38,11 @@ def post_score(zk, name, curr_score):
 
   zk.set('DIC/score_db', pickle.dumps(scores))
 
+#Create online session for current player
 def go_online(zk, name):
   zk.create('DIC/online_players/'+name, ephemeral=True)
 
+#Join and start playing the game with current player
 def join(zk,name,count=None,delay=None,score=None):
   if name in get_online_players(zk):
     print("Player already online")

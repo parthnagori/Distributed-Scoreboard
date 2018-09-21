@@ -5,11 +5,15 @@ from kazoo.recipe.watchers import ChildrenWatch
 from kazoo.recipe.watchers import DataWatch
 import pickle
 
+#Establishing connection with the Zookeeper Server
 def establish_connection(ip_port):
   zk = KazooClient()
   zk.start()
   return zk
 
+#Creating Base Directories:
+#--->online_players for maintaining player online session
+#--->score_db to maintain recent and highest scores
 def establish_directories(zk):
   children = zk.get_children('/')
   if 'DIC' not in children:
@@ -17,6 +21,7 @@ def establish_directories(zk):
     zk.create('/DIC/online_players', ephemeral=False)
     zk.create('/DIC/score_db', ephemeral=False)
 
+#To display a score
 def display_score(score):
   global online_players
   if score['name'] in online_players:
@@ -24,7 +29,7 @@ def display_score(score):
   else:
     print("{}     {}".format(score['name'].title(), score['score']))
 
-
+#To display the most recent and highest scores
 def update_scoreboard():
   global recent_scores
   global high_scores
@@ -38,7 +43,7 @@ def update_scoreboard():
   for score in high_scores:
     display_score(score)
 
-
+#Update the scoreboard if any player posts a new score
 def scores_updated(data,stat,event=None):
   global recent_scores
   global high_scores
@@ -48,6 +53,7 @@ def scores_updated(data,stat,event=None):
     high_scores = scores[1][:n]
     update_scoreboard()
 
+#Update the scoreboard if a player joins/leaves the game
 def update_online_status(children):
   global online_players
   if set(children) != set(online_players):
