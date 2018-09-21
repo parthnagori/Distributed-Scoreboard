@@ -44,8 +44,8 @@ def scores_updated(data,stat,event=None):
   global high_scores
   if data:
     scores = pickle.loads(data)
-    recent_scores = scores[:n]
-    high_scores = sorted(scores, key=lambda k: k['score'], reverse=True)[:n]
+    recent_scores = scores[0][:n]
+    high_scores = scores[1][:n]
     update_scoreboard()
 
 def update_online_status(children):

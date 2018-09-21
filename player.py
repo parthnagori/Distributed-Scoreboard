@@ -22,10 +22,14 @@ def get_online_players(zk):
 
 def post_score(zk, name, curr_score):
   data, stat = zk.get('DIC/score_db')
-  scores = []
+  scores = [[],[]]
   if data:
     scores = pickle.loads(data)
-  scores.insert(0, {'name': name, 'score': curr_score})
+  scores[0].insert(0, {'name': name, 'score': curr_score})
+  scores[0] = scores[0][:25]
+  scores[1].insert(0, {'name': name, 'score': curr_score})
+  scores[1] = sorted(scores[1], key=lambda k: k['score'], reverse=True)[:25]
+
   zk.set('DIC/score_db', pickle.dumps(scores))
 
 def go_online(zk, name):
