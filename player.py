@@ -7,7 +7,7 @@ import time
 
 #Establishing connection with the Zookeeper Server
 def establish_connection(ip_port):
-  zk = KazooClient()
+  zk = KazooClient(ip_port)
   zk.start()
   return zk
 

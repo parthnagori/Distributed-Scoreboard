@@ -7,7 +7,7 @@ import pickle
 
 #Establishing connection with the Zookeeper Server
 def establish_connection(ip_port):
-  zk = KazooClient()
+  zk = KazooClient(hosts=ip_port)
   zk.start()
   return zk
 
