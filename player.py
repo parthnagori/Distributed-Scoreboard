@@ -63,7 +63,7 @@ if __name__ == '__main__':
   default_port = "6000"
 
   args = sys.argv
-  print(args)
+  # print(args)
   if len(args) < 3:
     print("Please provide atleast the IP:Port and Player Name")
     exit(0)
