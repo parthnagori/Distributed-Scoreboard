@@ -33,7 +33,7 @@ def display_score(score):
 def update_scoreboard():
   global recent_scores
   global high_scores
-  print("Most Recent Scores")
+  print("\nMost Recent Scores")
   print("-------------------")
   for score in recent_scores:
     display_score(score)
