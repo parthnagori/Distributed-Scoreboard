@@ -60,7 +60,7 @@ if __name__ == '__main__':
   count=None
   delay=None
   score=None
-  default_port = "2181"
+  default_port = "6000"
 
   args = sys.argv
   print(args)

@@ -59,7 +59,7 @@ if __name__ == '__main__':
   recent_scores = []
   high_scores = []
   n = 25
-  default_port = "2181"
+  default_port = "6000"
   args = sys.argv
   if len(args) == 3:
     ip_port = args[1]
