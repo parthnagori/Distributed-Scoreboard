@@ -1,5 +1,9 @@
-# CSC_591_DIC_HW1
-Distributed Scoreboard
+# Distributed Scoreboard
+## Overview
+
+A distributed scoreboard application to keep track of player scores as well as their online status. The application uses zookeeper as a co-ordination service. The online status is maintained by ephemeral Znodes and scores are maintained in regular nodes. Player program can be used to insert/post scores to zookeeper server. Watchers display the scoreboards by implementing watches on player Znodes. The scoreboard displays n (count parameter -> default = 25) most recent scores as well as n top scores since the server has been up. 
+
+The program expects a zookeeper service running on some IP and port that will be passed as parameters in the form IP:PORT or just IP (defualt port = 2181).
 
 
 ## Cloning the repo
