@@ -5,7 +5,6 @@ A distributed scoreboard application to keep track of player scores as well as t
 
 The program expects a zookeeper service running on some IP and port that will be passed as parameters in the form IP:PORT or just IP (defualt port = 2181).
 
-
 ## Cloning the repo
 
     $ git clone https://github.ncsu.edu/pnagori/CSC_591_DIC_HW1.git
